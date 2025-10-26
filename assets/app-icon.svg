@@ -1,0 +1,41 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="90" ry="90" fill="url(#bgGradient)"/>
+  
+  <!-- First task item (completed) -->
+  <g transform="translate(80, 140)">
+    <!-- Checkbox background -->
+    <rect x="0" y="0" width="60" height="60" rx="8" ry="8" fill="white" stroke="none"/>
+    <!-- Checkmark -->
+    <path d="M15 30 L25 40 L45 20" stroke="#2196F3" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Task line -->
+    <rect x="80" y="20" width="280" height="20" rx="10" ry="10" fill="rgba(255,255,255,0.9)"/>
+  </g>
+  
+  <!-- Second task item -->
+  <g transform="translate(80, 240)">
+    <!-- Checkbox background -->
+    <rect x="0" y="0" width="60" height="60" rx="8" ry="8" fill="white" stroke="none"/>
+    <!-- Empty checkbox -->
+    <rect x="8" y="8" width="44" height="44" rx="4" ry="4" fill="#2196F3"/>
+    <!-- Task line -->
+    <rect x="80" y="20" width="240" height="20" rx="10" ry="10" fill="rgba(255,255,255,0.7)"/>
+  </g>
+  
+  <!-- Third task item -->
+  <g transform="translate(80, 340)">
+    <!-- Checkbox background -->
+    <rect x="0" y="0" width="60" height="60" rx="8" ry="8" fill="white" stroke="none"/>
+    <!-- Empty checkbox -->
+    <rect x="8" y="8" width="44" height="44" rx="4" ry="4" fill="#2196F3"/>
+    <!-- Task line -->
+    <rect x="80" y="20" width="200" height="20" rx="10" ry="10" fill="rgba(255,255,255,0.7)"/>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+{
+  "name": "dolist",
+  "version": "1.0.0",
+  "description": "A modern and elegant Todo application for Mac",
+  "type": "commonjs",
+  "main": "dist/main/main/main.js",
+  "author": "TaskFlow Team",
+  "license": "MIT",
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.main.json && tsc -p tsconfig.preload.json",
+    "dist": "npm run build && electron-builder",
+    "dev": "concurrently \"vite\" \"tsc -p tsconfig.main.json --watch\" \"electron dist/main/main/main.js\""
+  },
+  "dependencies": {
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "framer-motion": "^10.16.16",
+    "lucide-react": "^0.294.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
+    "react-hot-toast": "^2.4.1",
+    "sqlite3": "^5.1.6",
+    "tailwind-merge": "^2.1.0",
+    "zustand": "^4.4.7"
+  },
+  "build": {
+    "appId": "com.dolist.app",
+    "productName": "DoList",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64"]
+        }
+      ],
+      "icon": "assets/icon.icns",
+      "identity": null,
+      "gatekeeperAssess": false,
+      "hardenedRuntime": false
+    },
+    "dmg": {
+      "title": "DoList Installer",
+      "background": "assets/dmg-background.png"
+    }
+  }
+}

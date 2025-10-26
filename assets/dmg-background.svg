@@ -1,0 +1,73 @@
+<svg width="540" height="380" viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="540" height="380" fill="url(#bgGradient)"/>
+  
+  <!-- Subtle pattern -->
+  <g opacity="0.08">
+    <circle cx="80" cy="80" r="1.5" fill="#3b82f6"/>
+    <circle cx="160" cy="120" r="1" fill="#1d4ed8"/>
+    <circle cx="240" cy="60" r="1.5" fill="#3b82f6"/>
+    <circle cx="320" cy="140" r="1" fill="#1d4ed8"/>
+    <circle cx="400" cy="90" r="1.5" fill="#3b82f6"/>
+    <circle cx="460" cy="110" r="1" fill="#1d4ed8"/>
+    <circle cx="120" cy="200" r="1" fill="#1d4ed8"/>
+    <circle cx="280" cy="240" r="1.5" fill="#3b82f6"/>
+    <circle cx="420" cy="220" r="1" fill="#1d4ed8"/>
+    <circle cx="100" cy="300" r="1.5" fill="#3b82f6"/>
+    <circle cx="340" cy="320" r="1" fill="#1d4ed8"/>
+    <circle cx="480" cy="280" r="1.5" fill="#3b82f6"/>
+  </g>
+  
+  <!-- App icon placeholder -->
+  <g transform="translate(220, 80)">
+    <rect x="0" y="0" width="100" height="100" rx="20" fill="url(#accentGradient)" opacity="0.1"/>
+    <rect x="10" y="10" width="80" height="80" rx="15" fill="url(#accentGradient)" opacity="0.2"/>
+    <!-- Clipboard icon -->
+    <g transform="translate(30, 25)">
+      <rect x="10" y="5" width="20" height="25" rx="2" fill="none" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="5" y="0" width="30" height="8" rx="4" fill="#3b82f6"/>
+      <line x1="15" y1="12" x2="25" y2="12" stroke="#3b82f6" stroke-width="1.5"/>
+      <line x1="15" y1="16" x2="25" y2="16" stroke="#3b82f6" stroke-width="1.5"/>
+      <line x1="15" y1="20" x2="22" y2="20" stroke="#3b82f6" stroke-width="1.5"/>
+    </g>
+  </g>
+  
+  <!-- App name -->
+  <text x="270" y="220" text-anchor="middle" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="700" fill="#1e293b">
+    DoList
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="270" y="245" text-anchor="middle" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="400" fill="#64748b">
+    简洁高效的任务管理工具
+  </text>
+  
+  <!-- Installation instruction -->
+  <text x="270" y="330" text-anchor="middle" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="400" fill="#94a3b8">
+    将应用拖拽到右侧的应用程序文件夹
+  </text>
+  
+  <!-- Decorative elements -->
+  <g opacity="0.4">
+    <!-- Top decoration -->
+    <rect x="200" y="40" width="140" height="2" rx="1" fill="url(#accentGradient)" opacity="0.3"/>
+    
+    <!-- Bottom decoration -->
+    <rect x="180" y="350" width="180" height="1" rx="0.5" fill="url(#accentGradient)" opacity="0.2"/>
+    
+    <!-- Side decorations -->
+    <circle cx="50" cy="190" r="3" fill="url(#accentGradient)" opacity="0.15"/>
+    <circle cx="490" cy="190" r="3" fill="url(#accentGradient)" opacity="0.15"/>
+  </g>
+</svg>

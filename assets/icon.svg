@@ -1,0 +1,53 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="checkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- Inner circle for depth -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  
+  <!-- Checklist lines -->
+  <g stroke="rgba(255,255,255,0.9)" stroke-width="8" stroke-linecap="round">
+    <!-- First item (completed) -->
+    <line x1="140" y1="180" x2="220" y2="180" opacity="0.7"/>
+    <!-- Second item (completed) -->
+    <line x1="140" y1="220" x2="200" y2="220" opacity="0.7"/>
+    <!-- Third item (active) -->
+    <line x1="140" y1="260" x2="280" y2="260"/>
+    <!-- Fourth item (pending) -->
+    <line x1="140" y1="300" x2="240" y2="300" opacity="0.5"/>
+    <!-- Fifth item (pending) -->
+    <line x1="140" y1="340" x2="260" y2="340" opacity="0.3"/>
+  </g>
+  
+  <!-- Check marks -->
+  <g fill="none" stroke="url(#checkGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- First check -->
+    <path d="M100 175 L115 190 L135 170" opacity="0.8"/>
+    <!-- Second check -->
+    <path d="M100 215 L115 230 L135 210" opacity="0.8"/>
+  </g>
+  
+  <!-- Active circle indicator -->
+  <circle cx="115" cy="260" r="8" fill="url(#checkGradient)"/>
+  
+  <!-- Pending circles -->
+  <circle cx="115" cy="300" r="6" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  <circle cx="115" cy="340" r="6" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  
+  <!-- Subtle highlight -->
+  <ellipse cx="200" cy="180" rx="80" ry="40" fill="rgba(255,255,255,0.1)" transform="rotate(-30 200 180)"/>
+</svg>
