@@ -86,7 +86,7 @@
 
 1. **克隆项目**
    ```bash
-   git clone https://github.com/your-username/dolist.git
+   git clone https://github.com/NewToolAI/dolist.git
    cd dolist
    ```
 
