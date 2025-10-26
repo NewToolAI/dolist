@@ -322,9 +322,9 @@ chore: 构建过程或辅助工具的变动
 
 如果你遇到任何问题或有功能建议，请通过以下方式联系我们：
 
-- **GitHub Issues**: [提交问题](https://github.com/your-username/dolist/issues)
+- **GitHub Issues**: [提交问题](https://github.com/NewToolAI/dolist/issues)
 - **邮箱**: support@dolist.app
-- **讨论区**: [GitHub Discussions](https://github.com/your-username/dolist/discussions)
+- **讨论区**: [GitHub Discussions](https://github.com/NewToolAI/dolist/discussions)
 
 ### 常见问题
 
@@ -384,7 +384,7 @@ SOFTWARE.
 <div align="center">
   <p>用 ❤️ 制作 by DoList Team</p>
   <p>
-    <a href="https://github.com/your-username/dolist">GitHub</a> •
+    <a href="https://github.com/NewToolAI/dolist">GitHub</a> •
     <a href="https://dolist.app">官网</a> •
     <a href="mailto:support@dolist.app">联系我们</a>
   </p>
