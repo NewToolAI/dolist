@@ -204,7 +204,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 z-50 bg-white/95 dark:bg-gray-800/95 border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-xl shadow-gray-900/10 dark:shadow-black/20 backdrop-blur-md p-4 min-w-[300px] animate-in fade-in zoom-in-95 duration-200">
           {/* 头部：年月导航 */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-center mb-4">
             <div className="flex items-center gap-2">
               {/* 年份控制 */}
               <div className="flex items-center bg-gray-50 dark:bg-gray-700/50 rounded-lg p-1">
@@ -252,18 +252,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 </button>
               </div>
             </div>
-
-            {/* 今天按钮 */}
-            <button
-              onClick={() => {
-                const today = new Date()
-                setViewDate(today)
-                handleDateSelect(today.getDate())
-              }}
-              className="px-4 py-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all duration-200 hover:shadow-sm border border-blue-200/50 dark:border-blue-800/50"
-            >
-              今天
-            </button>
           </div>
 
           {/* 星期标题 */}
@@ -308,10 +296,30 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 onChange('')
                 setIsOpen(false)
               }}
-              className="px-3 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-all duration-200"
+              className="px-3 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200"
             >
               清除
             </button>
+            
+            <button
+              onClick={() => {
+                const today = new Date()
+                
+                // 检查最小日期限制
+                if (min && today < new Date(min)) {
+                  return
+                }
+                
+                setViewDate(today)
+                setSelectedDate(today)
+                onChange(today.toISOString().split('T')[0])
+                setIsOpen(false)
+              }}
+              className="px-4 py-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all duration-200 hover:shadow-sm border border-blue-200/50 dark:border-blue-800/50 hover:scale-105"
+            >
+              今天
+            </button>
+            
             <button
               onClick={() => setIsOpen(false)}
               className="px-4 py-1.5 text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200 border border-gray-200/50 dark:border-gray-600/50"
