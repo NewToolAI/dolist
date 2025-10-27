@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { Todo, TodoFilter, TodoStats } from '../../../shared/types'
+import { Todo, TodoFilter, TodoStats, DailyStats } from '../../../shared/types'
 import { StorageService } from '../services/storageService'
 import NotificationService from '../services/notificationService'
 
@@ -34,6 +34,7 @@ interface TodoState {
   // Computed
   filteredTodos: () => Todo[]
   todoStats: () => TodoStats
+  dailyStats: () => DailyStats
 }
 
 // 初始化示例数据
@@ -249,6 +250,46 @@ export const useTodoStore = create<TodoState>((set, get) => ({
         todo.dueDate && 
         new Date(todo.dueDate) < now
       ).length,
+    }
+  },
+
+  dailyStats: () => {
+    const { todos } = get()
+    const now = new Date()
+    const today = now.toDateString()
+    
+    // 今日创建的任务
+    const todayCreated = todos.filter(todo => 
+      new Date(todo.createdAt).toDateString() === today
+    ).length
+    
+    // 今日完成的任务
+    const todayCompleted = todos.filter(todo => 
+      todo.completed && new Date(todo.updatedAt).toDateString() === today
+    ).length
+    
+    // 今日到期的任务
+    const todayDue = todos.filter(todo => 
+      todo.dueDate && new Date(todo.dueDate).toDateString() === today
+    ).length
+    
+    // 今日逾期的任务
+    const todayOverdue = todos.filter(todo => 
+      !todo.completed && 
+      todo.dueDate && 
+      new Date(todo.dueDate).toDateString() === today &&
+      new Date(todo.dueDate) < now
+    ).length
+    
+    // 完成率计算
+    const completionRate = todayDue > 0 ? Math.round((todayCompleted / todayDue) * 100) : 0
+    
+    return {
+      todayCreated,
+      todayCompleted,
+      todayDue,
+      todayOverdue,
+      completionRate,
     }
   },
 }))

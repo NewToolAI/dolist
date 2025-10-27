@@ -20,6 +20,14 @@ export interface TodoStats {
   overdue: number
 }
 
+export interface DailyStats {
+  todayCreated: number
+  todayCompleted: number
+  todayDue: number
+  todayOverdue: number
+  completionRate: number
+}
+
 // 应用设置类型
 export interface AppSettings {
   theme: 'light' | 'dark' | 'system'

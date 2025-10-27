@@ -4,6 +4,7 @@ import { useTodoStore } from './store/todoStore'
 import { TodoItem } from './components/TodoItem'
 import { AddTodoForm } from './components/AddTodoForm'
 import { SettingsModal } from './components/SettingsModal'
+import { DailyStats } from './components/DailyStats'
 
 function App() {
   // 主题模式：system 跟随系统，light 亮模式，dark 暗模式
@@ -205,84 +206,92 @@ function App() {
 
         <div className="flex-1 flex overflow-hidden">
            {/* 侧边栏 */}
-           <div className="w-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-r border-gray-200/50 dark:border-gray-700/50 p-6 flex-shrink-0 overflow-y-auto">
-            <div className="space-y-4">
-              {/* 搜索框 */}
-              <div>
-                <input
-                   ref={searchInputRef}
-                   type="text"
-                   value={searchQuery}
-                   onChange={(e) => setSearchQuery(e.target.value)}
-                   placeholder="搜索"
-                   className="w-full px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
-                 />
-              </div>
+           <div className="w-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-r border-gray-200/50 dark:border-gray-700/50 flex-shrink-0 flex flex-col">
+            {/* 上部分：搜索和过滤 */}
+            <div className="p-6 flex-1 overflow-y-auto">
+              <div className="space-y-4">
+                {/* 搜索框 */}
+                <div>
+                  <input
+                     ref={searchInputRef}
+                     type="text"
+                     value={searchQuery}
+                     onChange={(e) => setSearchQuery(e.target.value)}
+                     placeholder="搜索"
+                     className="w-full px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
+                   />
+                </div>
 
-              {/* 任务过滤 */}
-              <div>
-                <h2 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                  任务列表
-                </h2>
-                <nav className="space-y-1">
-                  <button
-                     onClick={() => setFilter('all')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                       filter === 'all'
-                         ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                     }`}
-                   >
-                    <span className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      所有任务
-                    </span>
-                    <span className="text-xs">{stats.total}</span>
-                  </button>
-                  <button
-                     onClick={() => setFilter('active')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                       filter === 'active'
-                         ? 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                     }`}
-                   >
-                     <span className="flex items-center gap-2">
-                       <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                       进行中
-                     </span>
-                     <span className="text-xs font-semibold">{stats.active}</span>
-                   </button>
-                   <button
-                     onClick={() => setFilter('completed')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                       filter === 'completed'
-                         ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                     }`}
-                   >
-                     <span className="flex items-center gap-2">
-                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                       已完成
-                     </span>
-                     <span className="text-xs font-semibold">{stats.completed}</span>
-                   </button>
-                   <button
-                     onClick={() => setFilter('overdue')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                       filter === 'overdue'
-                         ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                     }`}
-                   >
-                     <span className="flex items-center gap-2">
-                       <span className="w-2 h-2 bg-red-500 rounded-full shadow-sm"></span>
-                       已逾期
-                     </span>
-                     <span className="text-xs font-semibold">{stats.overdue}</span>
-                   </button>
-                </nav>
+                {/* 任务过滤 */}
+                <div>
+                  <h2 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                    任务列表
+                  </h2>
+                  <nav className="space-y-1">
+                    <button
+                       onClick={() => setFilter('all')}
+                       className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                         filter === 'all'
+                           ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30'
+                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                       }`}
+                     >
+                      <span className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                        所有任务
+                      </span>
+                      <span className="text-xs">{stats.total}</span>
+                    </button>
+                    <button
+                       onClick={() => setFilter('active')}
+                       className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                         filter === 'active'
+                           ? 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30'
+                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                       }`}
+                     >
+                       <span className="flex items-center gap-2">
+                         <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                         进行中
+                       </span>
+                       <span className="text-xs font-semibold">{stats.active}</span>
+                     </button>
+                     <button
+                       onClick={() => setFilter('completed')}
+                       className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                         filter === 'completed'
+                           ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30'
+                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                       }`}
+                     >
+                       <span className="flex items-center gap-2">
+                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                         已完成
+                       </span>
+                       <span className="text-xs font-semibold">{stats.completed}</span>
+                     </button>
+                     <button
+                       onClick={() => setFilter('overdue')}
+                       className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                         filter === 'overdue'
+                           ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30'
+                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                       }`}
+                     >
+                       <span className="flex items-center gap-2">
+                         <span className="w-2 h-2 bg-red-500 rounded-full shadow-sm"></span>
+                         已逾期
+                       </span>
+                       <span className="text-xs font-semibold">{stats.overdue}</span>
+                     </button>
+                  </nav>
+                </div>
               </div>
+            </div>
+            
+            {/* 底部：每日任务统计 */}
+            <div className="p-6 border-t border-gray-200/50 dark:border-gray-700/50">
+              <DailyStats />
             </div>
           </div>
 
