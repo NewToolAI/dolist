@@ -52,6 +52,14 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   const [editDescription, setEditDescription] = React.useState(todo.description || '')
   const [editDueDate, setEditDueDate] = React.useState(todo.dueDate || '')
 
+  // 当退出编辑态时，重置本地编辑字段，丢弃未保存的更改
+  React.useEffect(() => {
+    if (!isEditing) {
+      setEditTitle(todo.title)
+      setEditDescription(todo.description || '')
+      setEditDueDate(todo.dueDate || '')
+    }
+  }, [isEditing, todo.title, todo.description, todo.dueDate])
   const handleSave = () => {
     if (!editTitle.trim()) return
     onEdit(todo.id, {

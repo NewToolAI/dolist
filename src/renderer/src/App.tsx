@@ -49,10 +49,23 @@ function App() {
   // 键盘快捷键
   React.useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase()
+
+      // ESC：关闭所有弹出菜单与编辑态，切换到「进行中」列表
+      if (key === 'escape') {
+        e.preventDefault()
+        setShowSettings(false)
+        setEditingId(null)
+        setSelectedId(null)
+        setFilter('active')
+        setSearchQuery('')
+        searchInputRef.current?.blur()
+        return
+      }
+
       const meta = e.metaKey || e.ctrlKey
       if (!meta) return
 
-      const key = e.key.toLowerCase()
       switch (key) {
         case 'n':
           e.preventDefault()
