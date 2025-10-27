@@ -41,8 +41,10 @@ function App() {
 
   // AddTodoForm 聚焦信号（Cmd+N）
   const [createFocusSignal, setCreateFocusSignal] = React.useState(0)
+  // 当前处于编辑态的任务 id（确保同一时间只有一个编辑）
+  const [editingId, setEditingId] = React.useState<string | null>(null)
   // TodoItem 快捷编辑信号（Cmd+E，仅对选中项生效）
-  const [editSignal, setEditSignal] = React.useState(0)
+  // removed: editSignal no longer used
 
   // 键盘快捷键
   React.useEffect(() => {
@@ -61,12 +63,13 @@ function App() {
             e.preventDefault()
             deleteTodo(selectedId)
             setSelectedId(null)
+            setEditingId((prev) => (prev === selectedId ? null : prev))
           }
           break
         case 'e':
           if (selectedId) {
             e.preventDefault()
-            setEditSignal((t) => t + 1)
+            setEditingId(selectedId)
           }
           break
         case 'f':
@@ -338,7 +341,9 @@ function App() {
                       isDragging={draggingId === todo.id}
                       onClick={() => setSelectedId(todo.id)}
                       isSelected={selectedId === todo.id}
-                      startEditSignal={selectedId === todo.id ? editSignal : undefined}
+                      isEditingExternal={editingId === todo.id}
+                      onStartEdit={() => setEditingId(todo.id)}
+                      onCancelEdit={() => setEditingId(null)}
                     />
                   ))
                 )}

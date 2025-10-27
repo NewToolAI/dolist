@@ -21,7 +21,10 @@ interface TodoItemProps {
   // 新增：选择与快捷编辑
   onClick?: () => void
   isSelected?: boolean
-  startEditSignal?: number
+  // 受控：编辑态（由父组件统一控制，确保同一时间只有一个处于编辑状态）
+  isEditingExternal?: boolean
+  onStartEdit?: () => void
+  onCancelEdit?: () => void
 }
 
 export const TodoItem: React.FC<TodoItemProps> = ({
@@ -40,48 +43,41 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   isDragging,
   onClick,
   isSelected,
-  startEditSignal,
+  isEditingExternal,
+  onStartEdit,
+  onCancelEdit,
 }) => {
-  const [isEditing, setIsEditing] = React.useState(false)
+  const isEditing = !!isEditingExternal
   const [editTitle, setEditTitle] = React.useState(todo.title)
   const [editDescription, setEditDescription] = React.useState(todo.description || '')
   const [editDueDate, setEditDueDate] = React.useState(todo.dueDate || '')
 
-  const handleEdit = () => {
-    if (isEditing && editTitle.trim()) {
-      onEdit(todo.id, { 
-        title: editTitle.trim(),
-        description: editDescription.trim() || undefined,
-        dueDate: editDueDate || undefined
-      })
-    }
-    setIsEditing(!isEditing)
+  const handleSave = () => {
+    if (!editTitle.trim()) return
+    onEdit(todo.id, {
+      title: editTitle.trim(),
+      description: editDescription.trim() || undefined,
+      dueDate: editDueDate || undefined,
+    })
+    onCancelEdit?.()
   }
 
   const handleCancel = () => {
     setEditTitle(todo.title)
     setEditDescription(todo.description || '')
     setEditDueDate(todo.dueDate || '')
-    setIsEditing(false)
+    onCancelEdit?.()
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-      handleEdit()
+      handleSave()
     } else if (e.key === 'Escape') {
       handleCancel()
     }
   }
 
   const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed
-
-  React.useEffect(() => {
-    if (typeof startEditSignal === 'number') {
-      setIsEditing(true)
-      // 将标题聚焦，便于直接编辑
-      // 这里在编辑表单渲染后，由于使用了 autoFocus 属性，浏览器会自动将焦点聚到标题输入框
-    }
-  }, [startEditSignal])
 
   return (
     <div
@@ -159,7 +155,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
                 </button>
                 <button
                   type="button"
-                  onClick={handleEdit}
+                  onClick={handleSave}
                   disabled={!editTitle.trim()}
                   className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
                 >
@@ -213,7 +209,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             </div>
           )}
           <button
-            onClick={handleEdit}
+            onClick={() => onStartEdit?.()}
             className="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-all duration-200"
             title="编辑"
           >
