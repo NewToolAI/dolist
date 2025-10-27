@@ -23,7 +23,7 @@ export const DailyStats: React.FC = () => {
             <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
             <span className="text-xs text-gray-600 dark:text-gray-400">今日创建</span>
           </div>
-          <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+          <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">
             {stats.todayCreated}
           </span>
         </div>
@@ -34,7 +34,7 @@ export const DailyStats: React.FC = () => {
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
             <span className="text-xs text-gray-600 dark:text-gray-400">今日完成</span>
           </div>
-          <span className="text-sm font-semibold text-green-600 dark:text-green-400">
+          <span className="text-xs font-semibold text-green-600 dark:text-green-400">
             {stats.todayCompleted}
           </span>
         </div>
@@ -45,7 +45,7 @@ export const DailyStats: React.FC = () => {
             <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
             <span className="text-xs text-gray-600 dark:text-gray-400">今日到期</span>
           </div>
-          <span className="text-sm font-semibold text-orange-600 dark:text-orange-400">
+          <span className="text-xs font-semibold text-orange-600 dark:text-orange-400">
             {stats.todayDue}
           </span>
         </div>
@@ -57,7 +57,7 @@ export const DailyStats: React.FC = () => {
               <div className="w-2 h-2 bg-red-500 rounded-full"></div>
               <span className="text-xs text-gray-600 dark:text-gray-400">今日逾期</span>
             </div>
-            <span className="text-sm font-semibold text-red-600 dark:text-red-400">
+            <span className="text-xs font-semibold text-red-600 dark:text-red-400">
               {stats.todayOverdue}
             </span>
           </div>
