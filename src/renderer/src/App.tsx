@@ -214,7 +214,7 @@ function App() {
                    type="text"
                    value={searchQuery}
                    onChange={(e) => setSearchQuery(e.target.value)}
-                   placeholder="搜索任务..."
+                   placeholder="搜索"
                    className="w-full px-4 py-3 text-sm bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400/50 transition-all duration-300 hover:shadow-md hover:shadow-blue-500/10"
                  />
               </div>

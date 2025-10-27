@@ -53,8 +53,8 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
           onChange={(e) => setTitle(e.target.value)}
           onFocus={() => setIsExpanded(true)}
           onKeyDown={handleKeyDown}
-          placeholder="添加新任务..."
-          className="w-full px-4 py-3 text-sm bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400/50 transition-all duration-300 hover:shadow-md hover:shadow-blue-500/10"
+          placeholder="新任务"
+          className="w-full px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400/50 transition-all duration-300 hover:shadow-md"
         />
         {title && (
           <button
@@ -75,7 +75,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="添加描述（可选）..."
+            placeholder="添加描述"
             rows={2}
             className="w-full px-3 py-2 text-sm bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400/50 resize-none transition-all duration-300 hover:shadow-md hover:shadow-blue-500/10"
           />

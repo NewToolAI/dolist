@@ -134,7 +134,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               value={editDescription}
               onChange={(e) => setEditDescription(e.target.value)}
               onKeyDown={handleKeyPress}
-              placeholder="任务描述（可选）"
+              placeholder="添加描述"
               rows={2}
               className="w-full px-3 py-2 text-sm bg-gray-50/80 dark:bg-gray-700/80 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 resize-none"
             />
