@@ -54,12 +54,12 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
           onFocus={() => setIsExpanded(true)}
           onKeyDown={handleKeyDown}
           placeholder="新任务"
-          className="w-full px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400/50 transition-all duration-300 hover:shadow-md"
+          className="w-full px-4 py-3.5 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
         />
         {title && (
           <button
             type="submit"
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1.5 text-blue-500 hover:text-blue-600 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-all duration-200"
             title="添加任务 (⌘+Enter)"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +77,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
             onKeyDown={handleKeyDown}
             placeholder="添加描述"
             rows={2}
-            className="w-full px-3 py-2 text-sm bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400/50 resize-none transition-all duration-300 hover:shadow-md hover:shadow-blue-500/10"
+            className="w-full px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
           />
           
           <div className="flex items-center justify-between">
@@ -88,7 +88,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
                 min={new Date().toISOString().split('T')[0]}
-                className="px-2 py-1 text-xs bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50 transition-all duration-300"
+                className="px-3 py-2 text-xs text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
               />
             </div>
             
@@ -100,14 +100,14 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
                   setDescription('')
                   setDueDate('')
                 }}
-                className="px-3 py-1.5 text-xs text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-all duration-300 hover:scale-105 rounded-lg"
+                className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
               >
                 取消
               </button>
               <button
                 type="submit"
                 disabled={!title.trim()}
-                className="px-4 py-1.5 text-xs font-medium text-white bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30"
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 添加任务
               </button>

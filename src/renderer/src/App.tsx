@@ -215,7 +215,7 @@ function App() {
                    value={searchQuery}
                    onChange={(e) => setSearchQuery(e.target.value)}
                    placeholder="搜索"
-                   className="w-full px-4 py-3 text-sm bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-600/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400/50 transition-all duration-300 hover:shadow-md hover:shadow-blue-500/10"
+                   className="w-full px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
                  />
               </div>
 
@@ -227,10 +227,10 @@ function App() {
                 <nav className="space-y-1">
                   <button
                      onClick={() => setFilter('all')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 hover:scale-105 ${
+                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                        filter === 'all'
-                         ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 shadow-md shadow-blue-500/20'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50/80 dark:hover:bg-gray-700/80 hover:shadow-md'
+                         ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30'
+                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                      }`}
                    >
                     <span className="flex items-center gap-2">
@@ -241,38 +241,38 @@ function App() {
                   </button>
                   <button
                      onClick={() => setFilter('active')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 hover:scale-105 ${
+                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                        filter === 'active'
-                         ? 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30 shadow-md shadow-orange-500/20'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50/80 dark:hover:bg-gray-700/80 hover:shadow-md'
+                         ? 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/30'
+                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                      }`}
                    >
                      <span className="flex items-center gap-2">
-                       <span className="w-2 h-2 bg-orange-500 rounded-full shadow-sm"></span>
+                       <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
                        进行中
                      </span>
                      <span className="text-xs font-semibold">{stats.active}</span>
                    </button>
                    <button
                      onClick={() => setFilter('completed')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 hover:scale-105 ${
+                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                        filter === 'completed'
-                         ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 shadow-md shadow-green-500/20'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50/80 dark:hover:bg-gray-700/80 hover:shadow-md'
+                         ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30'
+                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                      }`}
                    >
                      <span className="flex items-center gap-2">
-                       <span className="w-2 h-2 bg-green-500 rounded-full shadow-sm"></span>
+                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                        已完成
                      </span>
                      <span className="text-xs font-semibold">{stats.completed}</span>
                    </button>
                    <button
                      onClick={() => setFilter('overdue')}
-                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 hover:scale-105 ${
+                     className={`w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                        filter === 'overdue'
-                         ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30 shadow-md shadow-red-500/20'
-                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50/80 dark:hover:bg-gray-700/80 hover:shadow-md'
+                         ? 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/30'
+                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                      }`}
                    >
                      <span className="flex items-center gap-2">

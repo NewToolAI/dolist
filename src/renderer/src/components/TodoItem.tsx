@@ -127,7 +127,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               onChange={(e) => setEditTitle(e.target.value)}
               onKeyDown={handleKeyPress}
               placeholder="任务标题"
-              className="w-full px-3 py-2 text-sm bg-gray-50/80 dark:bg-gray-700/80 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400"
+              className="w-full px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
               autoFocus
             />
             <textarea
@@ -136,7 +136,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               onKeyDown={handleKeyPress}
               placeholder="添加描述"
               rows={2}
-              className="w-full px-3 py-2 text-sm bg-gray-50/80 dark:bg-gray-700/80 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-400 resize-none"
+              className="w-full px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-200"
             />
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -146,14 +146,14 @@ export const TodoItem: React.FC<TodoItemProps> = ({
                   value={editDueDate}
                   onChange={(e) => setEditDueDate(e.target.value)}
                   min={new Date().toISOString().split('T')[0]}
-                  className="px-2 py-1 text-xs bg-gray-50/80 dark:bg-gray-700/80 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500/50"
+                  className="px-3 py-2 text-xs text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 />
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="px-3 py-1.5 text-xs text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors rounded-lg"
+                  className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
                 >
                   取消
                 </button>
@@ -161,7 +161,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
                   type="button"
                   onClick={handleEdit}
                   disabled={!editTitle.trim()}
-                  className="px-4 py-1.5 text-xs font-medium text-white bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed rounded-lg transition-all duration-300 hover:scale-105"
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   保存
                 </button>
@@ -214,7 +214,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           )}
           <button
             onClick={handleEdit}
-            className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors duration-200"
+            className="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-all duration-200"
             title="编辑"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -223,7 +223,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           </button>
           <button
             onClick={() => onDelete(todo.id)}
-            className="p-1.5 text-gray-400 hover:text-red-500 transition-colors duration-200"
+            className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-all duration-200"
             title="删除"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
