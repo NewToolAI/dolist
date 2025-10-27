@@ -194,7 +194,7 @@ function App() {
 
   return (
     <div className={`h-screen flex flex-col transition-all duration-500 ${isDarkEffective ? 'dark' : ''}`}>
-      <div className="h-full flex flex-col bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
+      <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900 transition-all duration-500">
         {/* 标题栏 */}
         <div className="app-drag flex items-center justify-between px-4 py-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm flex-shrink-0">
           <div></div>
