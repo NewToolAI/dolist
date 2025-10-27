@@ -82,7 +82,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
           
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <label className="text-xs text-gray-600 dark:text-gray-400">截止日期:</label>
+              
               <input
                 type="date"
                 value={dueDate}
