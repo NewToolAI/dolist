@@ -382,10 +382,9 @@ SOFTWARE.
 ---
 
 <div align="center">
-  <p>用 ❤️ 制作 by DoList Team</p>
+  <p>用 ❤️ 制作 by NewToolAI Team</p>
   <p>
     <a href="https://github.com/NewToolAI/dolist">GitHub</a> •
-    <a href="https://dolist.app">官网</a> •
-    <a href="mailto:support@dolist.app">联系我们</a>
+    <a href="zhangslwork@yeah.net">联系我们</a>
   </p>
 </div>
