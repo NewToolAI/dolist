@@ -20,10 +20,43 @@ function App() {
     editTodo,
     setFilter,
     setSearchQuery,
+    reorderTodos,
   } = useTodoStore()
 
   const todos = filteredTodos()
   const stats = todoStats()
+
+  // 拖拽状态
+  const [draggingId, setDraggingId] = React.useState<string | null>(null)
+  const [dragOverId, setDragOverId] = React.useState<string | null>(null)
+
+  const createDragStart = (id: string) => (e: React.DragEvent<HTMLDivElement>) => {
+    e.dataTransfer.setData('text/plain', id)
+    e.dataTransfer.effectAllowed = 'move'
+    setDraggingId(id)
+  }
+  const createDragOver = (id: string) => (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+    setDragOverId(id)
+  }
+  const createDrop = (id: string) => (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    const sourceId = e.dataTransfer.getData('text/plain')
+    if (sourceId && sourceId !== id) {
+      reorderTodos(sourceId, id)
+    }
+    setDragOverId(null)
+    setDraggingId(null)
+  }
+  const handleDragEnd = () => {
+    setDragOverId(null)
+    setDraggingId(null)
+  }
+  const createDragEnter = (id: string) => () => setDragOverId(id)
+  const createDragLeave = (id: string) => () => {
+    if (dragOverId === id) setDragOverId(null)
+  }
 
   // 检测系统主题偏好
   React.useEffect(() => {
@@ -189,6 +222,15 @@ function App() {
                       onToggle={toggleTodo}
                       onDelete={deleteTodo}
                       onEdit={editTodo}
+                      draggable
+                      onDragStart={createDragStart(todo.id)}
+                      onDragOver={createDragOver(todo.id)}
+                      onDrop={createDrop(todo.id)}
+                      onDragEnd={handleDragEnd}
+                      onDragEnter={createDragEnter(todo.id)}
+                      onDragLeave={createDragLeave(todo.id)}
+                      isDragOver={dragOverId === todo.id}
+                      isDragging={draggingId === todo.id}
                     />
                   ))
                 )}

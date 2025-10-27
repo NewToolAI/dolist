@@ -6,6 +6,17 @@ interface TodoItemProps {
   onToggle: (id: string) => void
   onDelete: (id: string) => void
   onEdit: (id: string, updates: Partial<Todo>) => void
+  
+  // 可选：拖拽相关
+  draggable?: boolean
+  onDragStart?: (e: React.DragEvent<HTMLDivElement>) => void
+  onDragOver?: (e: React.DragEvent<HTMLDivElement>) => void
+  onDrop?: (e: React.DragEvent<HTMLDivElement>) => void
+  onDragEnd?: (e: React.DragEvent<HTMLDivElement>) => void
+  onDragEnter?: (e: React.DragEvent<HTMLDivElement>) => void
+  onDragLeave?: (e: React.DragEvent<HTMLDivElement>) => void
+  isDragOver?: boolean
+  isDragging?: boolean
 }
 
 export const TodoItem: React.FC<TodoItemProps> = ({
@@ -13,6 +24,15 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   onToggle,
   onDelete,
   onEdit,
+  draggable,
+  onDragStart,
+  onDragOver,
+  onDrop,
+  onDragEnd,
+  onDragEnter,
+  onDragLeave,
+  isDragOver,
+  isDragging,
 }) => {
   const [isEditing, setIsEditing] = React.useState(false)
   const [editTitle, setEditTitle] = React.useState(todo.title)
@@ -48,13 +68,22 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed
 
   return (
-    <div className={`group flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:shadow-blue-400/10 hover:scale-[1.02] hover:border-blue-300/50 dark:hover:border-blue-600/50 backdrop-blur-sm ${
-      todo.completed 
-        ? 'bg-gray-50/80 dark:bg-gray-800/80 border-gray-200/50 dark:border-gray-700/50 opacity-75 scale-95' 
-        : isOverdue
-        ? 'bg-red-50/80 dark:bg-red-900/20 border-red-200/50 dark:border-red-800/50'
-        : 'bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-700/50'
-    }`}>
+    <div
+      className={`group flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:shadow-blue-400/10 hover:scale-[1.02] hover:border-blue-300/50 dark:hover:border-blue-600/50 backdrop-blur-sm ${
+        todo.completed 
+          ? 'bg-gray-50/80 dark:bg-gray-800/80 border-gray-200/50 dark:border-gray-700/50 opacity-75 scale-95' 
+          : isOverdue
+          ? 'bg-red-50/80 dark:bg-red-900/20 border-red-200/50 dark:border-red-800/50'
+          : 'bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-700/50'
+      } ${isDragOver ? 'ring-2 ring-blue-400 border-blue-400' : ''} ${isDragging ? 'opacity-60' : ''}`}
+      draggable={draggable && !isEditing}
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      onDragEnd={onDragEnd}
+      onDragEnter={onDragEnter}
+      onDragLeave={onDragLeave}
+    >
       {/* 完成状态复选框 */}
       <button
         onClick={() => onToggle(todo.id)}
@@ -156,6 +185,16 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       {/* 操作按钮 */}
       {!isEditing && (
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          {/* 拖拽手柄 */}
+          {draggable && (
+            <div className="cursor-grab active:cursor-grabbing p-1.5 text-gray-400 hover:text-gray-600" title="拖动排序">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="5" cy="7" r="1" /><circle cx="12" cy="7" r="1" /><circle cx="19" cy="7" r="1" />
+                <circle cx="5" cy="12" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" />
+                <circle cx="5" cy="17" r="1" /><circle cx="12" cy="17" r="1" /><circle cx="19" cy="17" r="1" />
+              </svg>
+            </div>
+          )}
           <button
             onClick={handleEdit}
             className="p-1.5 text-gray-400 hover:text-blue-500 transition-colors duration-200"

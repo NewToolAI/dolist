@@ -28,6 +28,9 @@ interface TodoState {
   checkOverdueTodos: () => void
   testNotification: () => void
   
+  // 新增：拖拽排序
+  reorderTodos: (sourceId: string, targetId: string) => void
+  
   // Computed
   filteredTodos: () => Todo[]
   todoStats: () => TodoStats
@@ -115,6 +118,26 @@ export const useTodoStore = create<TodoState>((set, get) => ({
     }
   },
 
+  // 新增：拖拽排序（将 sourceId 的任务插入到 targetId 之前）
+  reorderTodos: (sourceId: string, targetId: string) => {
+    set((state) => {
+      const newTodos = [...state.todos]
+      const fromIndex = newTodos.findIndex(t => t.id === sourceId)
+      const toIndexOriginal = newTodos.findIndex(t => t.id === targetId)
+
+      if (fromIndex === -1 || toIndexOriginal === -1 || fromIndex === toIndexOriginal) {
+        return { todos: newTodos }
+      }
+
+      const [moved] = newTodos.splice(fromIndex, 1)
+      // 由于删除了一个元素，重新计算目标位置索引
+      const toIndex = newTodos.findIndex(t => t.id === targetId)
+      newTodos.splice(toIndex, 0, moved)
+
+      StorageService.saveTodos(newTodos)
+      return { todos: newTodos }
+    })
+  },
   setFilter: (filter: TodoFilter) => {
     set({ filter })
   },
