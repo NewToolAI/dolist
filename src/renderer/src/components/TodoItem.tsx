@@ -191,15 +191,36 @@ export const TodoItem: React.FC<TodoItemProps> = ({
                 {todo.description}
               </p>
             )}
-            {todo.dueDate && (
-              <p className={`text-xs mt-1 ${
-                isOverdue 
-                  ? 'text-red-600 dark:text-red-400 font-medium' 
+            {/* 日期信息容器 - 使用flex布局实现左右对齐 */}
+            <div className="flex items-center justify-between mt-2 text-xs">
+              {/* 创建日期 - 左对齐 */}
+              <span className={`${
+                todo.completed 
+                  ? 'text-gray-400 dark:text-gray-500' 
                   : 'text-gray-500 dark:text-gray-400'
               }`}>
-                截止: {new Date(todo.dueDate).toLocaleDateString('zh-CN')}
-              </p>
-            )}
+                创建: {new Date(todo.createdAt).toLocaleDateString('zh-CN', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit'
+                }).replace(/\//g, '/')}
+              </span>
+              
+              {/* 截止日期 - 右对齐 */}
+              {todo.dueDate && (
+                <span className={`${
+                  isOverdue 
+                    ? 'text-red-600 dark:text-red-400 font-medium' 
+                    : 'text-gray-500 dark:text-gray-400'
+                }`}>
+                  截止: {new Date(todo.dueDate).toLocaleDateString('zh-CN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                  }).replace(/\//g, '/')}
+                </span>
+              )}
+            </div>
           </div>
         )}
       </div>
