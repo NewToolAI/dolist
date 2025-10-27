@@ -54,7 +54,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
           onFocus={() => setIsExpanded(true)}
           onKeyDown={handleKeyDown}
           placeholder="新任务"
-          className="w-full px-4 py-3.5 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
+          className="w-full px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
         />
         {title && (
           <button
@@ -77,7 +77,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
             onKeyDown={handleKeyDown}
             placeholder="添加描述"
             rows={2}
-            className="w-full px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
+            className="w-full px-4 py-3 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all duration-200 hover:border-gray-300 dark:hover:border-gray-600"
           />
           
           <div className="flex items-center justify-between">
