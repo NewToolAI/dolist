@@ -6,7 +6,7 @@
   <h3>简洁高效的任务管理工具</h3>
   <p>专为Mac用户设计的现代化Todo应用，具备智能提醒和优雅界面</p>
   
-  ![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)
+  ![Version](https://img.shields.io/badge/version-1.0.2-blue.svg)
   ![Platform](https://img.shields.io/badge/platform-macOS-lightgrey.svg)
   ![License](https://img.shields.io/badge/license-MIT-green.svg)
 </div>
