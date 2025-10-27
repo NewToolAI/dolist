@@ -40,7 +40,7 @@ function App() {
   const searchInputRef = React.useRef<HTMLInputElement>(null)
 
   // AddTodoForm 聚焦信号（Cmd+N）
-  const [createFocusSignal, setCreateFocusSignal] = React.useState(0)
+  const [createFocusSignal, setCreateFocusSignal] = React.useState<number | undefined>(undefined)
   // 当前处于编辑态的任务 id（确保同一时间只有一个编辑）
   const [editingId, setEditingId] = React.useState<string | null>(null)
   // TodoItem 快捷编辑信号（Cmd+E，仅对选中项生效）
@@ -56,7 +56,7 @@ function App() {
       switch (key) {
         case 'n':
           e.preventDefault()
-          setCreateFocusSignal((t) => t + 1)
+          setCreateFocusSignal((t) => (t ?? 0) + 1)
           break
         case 'd':
           if (selectedId) {
