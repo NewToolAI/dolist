@@ -11,7 +11,7 @@ function createWindow(): void {
   // 创建浏览器窗口
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 700,
     minWidth: 800,
     minHeight: 600,
     titleBarStyle: 'hiddenInset',
