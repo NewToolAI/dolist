@@ -53,7 +53,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
   }, [focusSignal])
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className={`relative space-y-4 ${isExpanded ? 'z-40' : 'z-0'}`}>
       {!isExpanded ? (
         <button
           type="button"

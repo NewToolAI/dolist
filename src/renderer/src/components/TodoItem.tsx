@@ -90,7 +90,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
 
   return (
     <div
-      className={`group flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:shadow-blue-400/10 hover:scale-[1.02] hover:border-blue-300/50 dark:hover:border-blue-600/50 backdrop-blur-sm ${
+      className={`group relative ${isEditing ? 'z-40' : 'z-0'} flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:shadow-blue-400/10 hover:scale-[1.02] hover:border-blue-300/50 dark:hover:border-blue-600/50 backdrop-blur-sm ${
         todo.completed 
           ? 'bg-gray-50/80 dark:bg-gray-800/80 border-gray-200/50 dark:border-gray-700/50 opacity-75 scale-95' 
           : isOverdue
