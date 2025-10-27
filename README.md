@@ -1,4 +1,4 @@
-# DoList - 现代化Mac桌面Todo应用 (Vibe-Coding)
+# DoList - 现代化Mac桌面Todo应用
 
 <div align="center">
   <img src="assets/app-icon.svg" alt="DoList Logo" width="120" height="120">
@@ -14,7 +14,7 @@
 ## 📱 应用预览
 
 <div align="center">
-  <img src="docs/app-demo.svg" alt="DoList 应用界面演示" width="100%">
+  <img src="docs/app-demo.png" alt="DoList 应用界面演示" width="100%">
 </div>
 
 ## ✨ 核心功能
