@@ -10,6 +10,8 @@ interface DatePickerProps {
   className?: string
   size?: 'small' | 'medium' | 'large'
   disabled?: boolean
+  // 当日期选择器被打开时触发（仅在从关闭到打开的瞬间触发一次）
+  onOpen?: () => void
 }
 
 export const DatePicker: React.FC<DatePickerProps> = ({
@@ -20,7 +22,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   placeholder = '截止日期',
   className = '',
   size = 'medium',
-  disabled = false
+  disabled = false,
+  onOpen
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState<Date | null>(
@@ -181,7 +184,15 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           'flex items-center justify-between',
           disabled && 'opacity-50 cursor-not-allowed'
         )}
-        onClick={() => !disabled && setIsOpen(!isOpen)}
+        onClick={() => {
+          if (disabled) return
+          const nextOpen = !isOpen
+          setIsOpen(nextOpen)
+          // 仅当从关闭变为打开时，通知外部
+          if (nextOpen) {
+            onOpen?.()
+          }
+        }}
       >
         <span className={cn(
           selectedDate ? 'text-gray-900 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400'

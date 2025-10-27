@@ -5,9 +5,11 @@ interface AddTodoFormProps {
   onAdd: (title: string, description?: string, dueDate?: string) => void
   // 新增：用于触发“新建任务”时聚焦标题输入框
   focusSignal?: number
+  // 新增：当点击“新任务截止日期”并打开日期选择器时触发
+  onDueDateOpen?: () => void
 }
 
-export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) => {
+export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal, onDueDateOpen }) => {
   const [title, setTitle] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [dueDate, setDueDate] = React.useState('')
@@ -105,6 +107,7 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) 
                   min={new Date().toISOString().split('T')[0]}
                   placeholder="截止日期"
                   size="small"
+                  onOpen={onDueDateOpen}
                 />
               </div>
               

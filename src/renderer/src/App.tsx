@@ -316,7 +316,14 @@ function App() {
              <div className="p-8">
               {/* 添加任务表单 */}
               <div className="mb-6">
-                <AddTodoForm onAdd={addTodo} focusSignal={createFocusSignal} />
+                <AddTodoForm 
+                  onAdd={addTodo} 
+                  focusSignal={createFocusSignal}
+                  onDueDateOpen={() => {
+                    // 如果任务修改界面打开，立刻关闭并不保存修改
+                    setEditingId(null)
+                  }}
+                />
               </div>
 
               {/* 任务列表 */}
