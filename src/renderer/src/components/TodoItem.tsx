@@ -1,5 +1,6 @@
 import React from 'react'
 import { Todo } from '../../../shared/types'
+import { DatePicker } from './DatePicker'
 
 interface TodoItemProps {
   todo: Todo
@@ -144,13 +145,13 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             />
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                
-                <input
-                  type="date"
+                <DatePicker
                   value={editDueDate}
-                  onChange={(e) => setEditDueDate(e.target.value)}
+                  onChange={setEditDueDate}
+                  onKeyDown={handleKeyPress}
                   min={new Date().toISOString().split('T')[0]}
-                  className="px-3 py-2 text-xs text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  placeholder="截止日期"
+                  size="small"
                 />
               </div>
               <div className="flex items-center gap-2">
