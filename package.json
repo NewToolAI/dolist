@@ -1,6 +1,6 @@
 {
   "name": "dolist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modern and elegant Todo application for Mac",
   "type": "commonjs",
   "main": "dist/main/main/main.js",
