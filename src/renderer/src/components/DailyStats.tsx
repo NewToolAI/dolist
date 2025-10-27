@@ -63,24 +63,6 @@ export const DailyStats: React.FC = () => {
           </div>
         )}
 
-        {/* 完成率 */}
-        {stats.todayDue > 0 && (
-          <div className="pt-2 border-t border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-xs text-gray-600 dark:text-gray-400">完成率</span>
-              <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">
-                {stats.completionRate}%
-              </span>
-            </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
-              <div 
-                className="bg-gradient-to-r from-green-400 to-green-600 h-1.5 rounded-full transition-all duration-300"
-                style={{ width: `${stats.completionRate}%` }}
-              ></div>
-            </div>
-          </div>
-        )}
-
         {/* 空状态提示 */}
         {stats.todayCreated === 0 && stats.todayDue === 0 && (
           <div className="text-center py-2">
