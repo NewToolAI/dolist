@@ -6,7 +6,13 @@ import { AddTodoForm } from './components/AddTodoForm'
 import { SettingsModal } from './components/SettingsModal'
 
 function App() {
-  const [isDark, setIsDark] = React.useState(false)
+  // 主题模式：system 跟随系统，light 亮模式，dark 暗模式
+  type ThemeMode = 'system' | 'light' | 'dark'
+  const [themeMode, setThemeMode] = React.useState<ThemeMode>(() => {
+    const saved = localStorage.getItem('themeMode') as ThemeMode | null
+    return saved ?? 'system'
+  })
+  const [systemPrefDark, setSystemPrefDark] = React.useState(false)
   const [showSettings, setShowSettings] = React.useState(false)
   
   const {
@@ -72,7 +78,7 @@ function App() {
           break
         case 't':
           e.preventDefault()
-          setIsDark((d) => !d)
+          setThemeMode((m) => (m === 'system' ? 'light' : m === 'light' ? 'dark' : 'system'))
           break
         default:
           break
@@ -117,27 +123,60 @@ function App() {
   // 检测系统主题偏好
   React.useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setIsDark(mediaQuery.matches)
+    setSystemPrefDark(mediaQuery.matches)
     
     const handleChange = (e: MediaQueryListEvent) => {
-      setIsDark(e.matches)
+      setSystemPrefDark(e.matches)
     }
     
     mediaQuery.addEventListener('change', handleChange)
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
-  // 应用主题类
+  // 应用主题类（根据 ThemeMode 与系统偏好）
+  const isDarkEffective = themeMode === 'dark' || (themeMode === 'system' && systemPrefDark)
   React.useEffect(() => {
-    if (isDark) {
+    if (isDarkEffective) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
-  }, [isDark])
+    localStorage.setItem('themeMode', themeMode)
+  }, [isDarkEffective, themeMode])
+
+  const cycleThemeMode = () => {
+    setThemeMode((m) => (m === 'system' ? 'light' : m === 'light' ? 'dark' : 'system'))
+  }
+
+  const renderThemeIcon = () => {
+    switch (themeMode) {
+      case 'system':
+        return (
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="12" rx="2" strokeWidth="2" />
+            <path d="M9 21h6M12 17v4" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        )
+      case 'light':
+        return (
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4" strokeWidth="2" />
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        )
+      case 'dark':
+        return (
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )
+      default:
+        return null
+    }
+  }
 
   return (
-    <div className={`h-screen flex flex-col transition-all duration-500 ${isDark ? 'dark' : ''}`}>
+    <div className={`h-screen flex flex-col transition-all duration-500 ${isDarkEffective ? 'dark' : ''}`}>
       <div className="h-full flex flex-col bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-all duration-500">
         {/* 标题栏 */}
         <div className="app-drag flex items-center justify-between px-4 py-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm flex-shrink-0">
@@ -155,11 +194,11 @@ function App() {
               </svg>
             </button>
             <button
-              onClick={() => setIsDark(!isDark)}
+              onClick={cycleThemeMode}
               className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              title="切换主题"
+              title={themeMode === 'system' ? '跟随系统' : themeMode === 'light' ? '亮模式' : '暗模式'}
             >
-              {isDark ? '🌞' : '🌙'}
+              {renderThemeIcon()}
             </button>
           </div>
         </div>
