@@ -67,7 +67,7 @@ export const useTodoStore = create<TodoState>((set, get) => ({
     }
     
     set((state) => {
-      const newTodos = [...state.todos, newTodo]
+      const newTodos = [newTodo, ...state.todos]
       StorageService.saveTodos(newTodos)
       return { todos: newTodos }
     })
