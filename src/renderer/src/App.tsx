@@ -26,6 +26,62 @@ function App() {
   const todos = filteredTodos()
   const stats = todoStats()
 
+  // 选择状态
+  const [selectedId, setSelectedId] = React.useState<string | null>(null)
+
+  // 搜索框引用
+  const searchInputRef = React.useRef<HTMLInputElement>(null)
+
+  // AddTodoForm 聚焦信号（Cmd+N）
+  const [createFocusSignal, setCreateFocusSignal] = React.useState(0)
+  // TodoItem 快捷编辑信号（Cmd+E，仅对选中项生效）
+  const [editSignal, setEditSignal] = React.useState(0)
+
+  // 键盘快捷键
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const meta = e.metaKey || e.ctrlKey
+      if (!meta) return
+
+      const key = e.key.toLowerCase()
+      switch (key) {
+        case 'n':
+          e.preventDefault()
+          setCreateFocusSignal((t) => t + 1)
+          break
+        case 'd':
+          if (selectedId) {
+            e.preventDefault()
+            deleteTodo(selectedId)
+            setSelectedId(null)
+          }
+          break
+        case 'e':
+          if (selectedId) {
+            e.preventDefault()
+            setEditSignal((t) => t + 1)
+          }
+          break
+        case 'f':
+          e.preventDefault()
+          searchInputRef.current?.focus()
+          break
+        case ',':
+          e.preventDefault()
+          setShowSettings(true)
+          break
+        case 't':
+          e.preventDefault()
+          setIsDark((d) => !d)
+          break
+        default:
+          break
+      }
+    }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [selectedId, deleteTodo])
+
   // 拖拽状态
   const [draggingId, setDraggingId] = React.useState<string | null>(null)
   const [dragOverId, setDragOverId] = React.useState<string | null>(null)
@@ -115,6 +171,7 @@ function App() {
               {/* 搜索框 */}
               <div>
                 <input
+                   ref={searchInputRef}
                    type="text"
                    value={searchQuery}
                    onChange={(e) => setSearchQuery(e.target.value)}
@@ -195,7 +252,7 @@ function App() {
              <div className="p-8">
               {/* 添加任务表单 */}
               <div className="mb-6">
-                <AddTodoForm onAdd={addTodo} />
+                <AddTodoForm onAdd={addTodo} focusSignal={createFocusSignal} />
               </div>
 
               {/* 任务列表 */}
@@ -231,6 +288,9 @@ function App() {
                       onDragLeave={createDragLeave(todo.id)}
                       isDragOver={dragOverId === todo.id}
                       isDragging={draggingId === todo.id}
+                      onClick={() => setSelectedId(todo.id)}
+                      isSelected={selectedId === todo.id}
+                      startEditSignal={selectedId === todo.id ? editSignal : undefined}
                     />
                   ))
                 )}

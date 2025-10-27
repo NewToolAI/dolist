@@ -2,13 +2,16 @@ import React from 'react'
 
 interface AddTodoFormProps {
   onAdd: (title: string, description?: string, dueDate?: string) => void
+  // 新增：用于触发“新建任务”时聚焦标题输入框
+  focusSignal?: number
 }
 
-export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd }) => {
+export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd, focusSignal }) => {
   const [title, setTitle] = React.useState('')
   const [description, setDescription] = React.useState('')
   const [dueDate, setDueDate] = React.useState('')
   const [isExpanded, setIsExpanded] = React.useState(false)
+  const titleInputRef = React.useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,10 +34,20 @@ export const AddTodoForm: React.FC<AddTodoFormProps> = ({ onAdd }) => {
     }
   }
 
+  // 当收到外部的 focusSignal 时，展开区域并聚焦标题输入框
+  React.useEffect(() => {
+    if (typeof focusSignal === 'number') {
+      setIsExpanded(true)
+      // 下一帧再聚焦，确保元素已渲染
+      setTimeout(() => titleInputRef.current?.focus(), 0)
+    }
+  }, [focusSignal])
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="relative">
         <input
+          ref={titleInputRef}
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}

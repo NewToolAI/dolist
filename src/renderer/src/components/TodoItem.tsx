@@ -17,6 +17,11 @@ interface TodoItemProps {
   onDragLeave?: (e: React.DragEvent<HTMLDivElement>) => void
   isDragOver?: boolean
   isDragging?: boolean
+  
+  // 新增：选择与快捷编辑
+  onClick?: () => void
+  isSelected?: boolean
+  startEditSignal?: number
 }
 
 export const TodoItem: React.FC<TodoItemProps> = ({
@@ -33,6 +38,9 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   onDragLeave,
   isDragOver,
   isDragging,
+  onClick,
+  isSelected,
+  startEditSignal,
 }) => {
   const [isEditing, setIsEditing] = React.useState(false)
   const [editTitle, setEditTitle] = React.useState(todo.title)
@@ -67,6 +75,14 @@ export const TodoItem: React.FC<TodoItemProps> = ({
 
   const isOverdue = todo.dueDate && new Date(todo.dueDate) < new Date() && !todo.completed
 
+  React.useEffect(() => {
+    if (typeof startEditSignal === 'number') {
+      setIsEditing(true)
+      // 将标题聚焦，便于直接编辑
+      // 这里在编辑表单渲染后，由于使用了 autoFocus 属性，浏览器会自动将焦点聚到标题输入框
+    }
+  }, [startEditSignal])
+
   return (
     <div
       className={`group flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:shadow-blue-400/10 hover:scale-[1.02] hover:border-blue-300/50 dark:hover:border-blue-600/50 backdrop-blur-sm ${
@@ -75,7 +91,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           : isOverdue
           ? 'bg-red-50/80 dark:bg-red-900/20 border-red-200/50 dark:border-red-800/50'
           : 'bg-white/80 dark:bg-gray-900/80 border-gray-200/50 dark:border-gray-700/50'
-      } ${isDragOver ? 'ring-2 ring-blue-400 border-blue-400' : ''} ${isDragging ? 'opacity-60' : ''}`}
+      } ${isDragOver ? 'ring-2 ring-blue-400 border-blue-400' : ''} ${isDragging ? 'opacity-60' : ''} ${isSelected ? 'ring-2 ring-blue-500 border-blue-400' : ''}`}
       draggable={draggable && !isEditing}
       onDragStart={onDragStart}
       onDragOver={onDragOver}
@@ -83,6 +99,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       onDragEnd={onDragEnd}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
+      onClick={onClick}
     >
       {/* 完成状态复选框 */}
       <button
